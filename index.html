@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>BCA Mobile</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto}
+body{background:#f4f6f8}
+
+/* HALAMAN LOGIN */
+.login-top-bar{
+background:#003366;
+padding:15px 20px;
+}
+.login-top-bar h1{
+color:#fff;
+font-size:20px;
+font-weight:600;
+}
+.login-container{
+padding:30px 25px;
+display:flex;justify-content:center;align-items:flex-start;
+min-height:calc(100vh - 60px);
+}
+.login-card{
+width:100%;max-width:450px;
+background:#fff;
+border-radius:16px;
+padding:30px 25px;
+box-shadow:0 3px 10px rgba(0,0,0,.08);
+}
+.login-card h2{
+font-size:24px;
+font-weight:700;
+color:#000;
+margin-bottom:25px;
+}
+.login-input{
+width:100%;
+padding:14px 18px;
+border:1px solid #ccc;
+border-radius:8px;
+font-size:16px;
+color:#333;
+}
+.login-input::placeholder{
+color:#999;
+}
+.login-btn{
+width:100%;
+padding:14px;
+margin-top:20px;
+background:#003366;
+color:#fff;
+font-size:16px;
+font-weight:600;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+.login-btn:disabled{
+background:#668cb3;
+cursor:not-allowed;
+}
+.login-alert{
+margin-top:15px;
+font-size:14px;
+color:#dc3545;
+text-align:center;
+display:none;
+}
+
+/* HALAMAN BRIMO UTAMA */
+.app{min-height:100vh;width:100vw;display:flex;flex-direction:column;display:none;}
+
+.header{
+background:linear-gradient(180deg,#0f78c9,#0a4f87);
+padding:20px 16px 24px;color:#fff
+}
+.header-top{display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:20px;font-weight:700}
+.greet{font-size:14px}
+.icons{display:flex;gap:10px}
+.icon{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.2);
+display:flex;align-items:center;justify-content:center}
+
+.balance-card{
+margin-top:18px;background:linear-gradient(180deg,#0c65aa,#094a80);
+border-radius:18px;padding:16px
+}
+.balance{display:flex;align-items:center;gap:10px;margin:10px 0}
+#saldo{font-size:20px;letter-spacing:2px}
+.eye{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.25);
+display:flex;align-items:center;justify-content:center;cursor:pointer}
+
+.quick{
+background:#0a4f87;padding:14px 12px;
+display:grid;grid-template-columns:repeat(4,1fr);gap:12px
+}
+.quick-item{
+background:#0f78c9;border-radius:14px;padding:14px 5px;
+text-align:center;color:#fff;font-size:12px;cursor:pointer
+}
+.quick-item div{font-size:22px;margin-bottom:6px}
+
+.slider{width:100%;overflow:hidden}
+.slider-track{display:flex;transition:.5s}
+.slide{min-width:100%;padding:14px}
+.slide img{width:100%;height:150px;object-fit:cover;border-radius:16px}
+
+.content{flex:1;padding-bottom:90px}
+.info{margin:15px;background:#fff;border-radius:16px;padding:15px}
+.info-title{
+background:#0f78c9;color:#fff;padding:10px;
+border-radius:10px;font-size:14px;margin-bottom:10px
+}
+.info p{font-size:13px;line-height:1.6}
+
+.nav{
+position:fixed;bottom:0;left:0;width:100%;
+background:#0a4f87;padding:10px 0;
+display:flex;justify-content:space-around
+}
+.nav-item{text-align:center;color:#fff;font-size:11px;cursor:pointer}
+.nav-item div{font-size:22px}
+
+/* HALAMAN AKUN SESUAI GAMBAR */
+.account-page{
+min-height:100vh;width:100vw;display:flex;flex-direction:column;display:none;
+background:#f4f6f8;
+}
+.account-top-bar{
+background:#003366;
+padding:15px 20px;
+}
+.account-top-bar h1{
+color:#fff;
+font-size:20px;
+font-weight:600;
+}
+.account-content{
+padding:25px 20px;
+flex:1;
+}
+/* Kartu Akun */
+.account-card{
+background:linear-gradient(180deg,#003366,#0055aa);
+border-radius:16px;
+padding:25px 20px;
+color:#fff;
+margin-bottom:25px;
+box-shadow:0 4px 12px rgba(0,0,0,.1);
+}
+.card-chip{
+width:50px;height:35px;
+background:#ffcc00;
+border-radius:6px;
+margin-bottom:25px;
+}
+.card-number{
+font-size:18px;
+letter-spacing:1px;
+margin-bottom:20px;
+}
+.card-holder{
+font-size:16px;
+}
+/* Detail Akun */
+.account-details{
+background:#fff;
+border-radius:16px;
+padding:20px;
+box-shadow:0 2px 8px rgba(0,0,0,.08);
+margin-bottom:30px;
+}
+.account-details p{
+font-size:16px;
+color:#333;
+margin:12px 0;
+line-height:1.5;
+}
+.account-details span{
+font-weight:600;
+color:#003366;
+min-width:80px;
+display:inline-block;
+}
+/* Tombol Kembali */
+.back-btn{
+width:100%;
+padding:14px;
+background:#003366;
+color:#fff;
+font-size:16px;
+font-weight:600;
+border:none;
+border-radius:10px;
+cursor:pointer;
+}
+/* Tombol Chat */
+.chat-fab{
+position:fixed;bottom:20px;right:20px;
+width:60px;height:60px;
+background:#28a745;
+border-radius:50%;
+display:flex;align-items:center;justify-content:center;
+box-shadow:0 2px 8px rgba(0,0,0,.2);
+cursor:pointer;
+}
+.chat-fab div{
+font-size:28px;
+color:#fff;
+}
+
+/* POPUP UMUM */
+.popup{
+position:fixed;inset:0;background:rgba(0,0,0,.5);
+display:none;align-items:center;justify-content:center;z-index:99
+}
+.popup-box{
+background:#fff;width:85%;max-width:400px;border-radius:16px;padding:20px;
+text-align:left;
+}
+.popup-box h3{margin-bottom:15px;color:#003366;text-align:center;font-size:18px}
+.popup-label{font-size:14px;color:#333;margin:10px 0 5px;display:block}
+.popup-input,.popup-select{
+width:100%;padding:12px 10px;margin:5px 0;border-radius:8px;border:1px solid #ccc;font-size:14px
+}
+.popup-btn{
+margin-top:20px;width:100%;padding:12px;border:none;
+border-radius:10px;background:#003366;color:#fff;font-weight:600;cursor:pointer;font-size:16px
+}
+.process-popup-box{text-align:center}
+.process-popup-box p{font-size:16px;color:#333;margin-top:10px}
+.info-popup-box p{font-size:14px;color:#333;line-height:1.6;margin:5px 0}
+.info-popup-box .note{color:#dc3545;font-weight:500;margin-top:10px}
+
+/* FLOATING WHATSAPP */
+.wa-float{
+position:fixed;
+bottom:95px; /* aman tidak tabrakan dengan navbar */
+right:20px;
+width:60px;
+height:60px;
+background:#25D366;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+text-decoration:none;
+box-shadow:0 4px 12px rgba(0,0,0,.25);
+z-index:9999;
+transition:.3s;
+}
+
+.wa-float span{
+font-size:30px;
+color:#fff;
+}
+
+.wa-float:hover{
+transform:scale(1.1);
+background:#1ebe5d;
+}
+
+</style>
+</head>
+
+<body>
+
+</a>
+
+<!-- HALAMAN LOGIN -->
+<div class="login-top-bar">
+<h1>BCA Mobile</h1>
+</div>
+<div class="login-container">
+<div class="login-card">
+<h2>Login BCA Mobile</h2>
+<input type="text" id="phoneInput" class="login-input" placeholder="Nomor Handphone">
+<button id="loginBtn" class="login-btn" disabled>LOGIN</button>
+<div id="alertMsg" class="login-alert">Nomor handphone tidak valid!</div>
+</div>
+</div>
+
+<!-- HALAMAN BRIMO UTAMA -->
+<div class="app" id="brimoApp">
+<div class="header">
+<div class="header-top">
+<div>
+<div class="logo">BCA Mobile</div>
+<div class="greet">Hai, Nasabah</div>
+</div>
+<div class="icons">
+<div class="icon">🔔</div>
+<div class="icon">🎧</div>
+</div>
+</div>
+
+<div class="balance-card">
+<small>Saldo Anda</small>
+<div class="balance">
+<span id="saldo">● ● ● ● ● ●</span>
+<div class="eye" onclick="toggleSaldo()">👁</div>
+</div>
+</div>
+</div>
+
+<div class="quick">
+<div class="quick-item" onclick="openTransferForm()"><div>⇄</div>Transfer</div>
+<div class="quick-item" onclick="openBRIVAForm()"><div>🎫</div>VIRTUAL</div>
+<div class="quick-item" onclick="openInfoPopup()"><div>ℹ️</div>Info</div>
+<div class="quick-item" onclick="openQRISPopup()"><div>📱</div>QRIS</div> <!-- Menu QRIS Ditambahkan -->
+</div>
+
+<div class="slider">
+<div class="slider-track" id="sliderTrack"></div>
+</div>
+
+<div class="content">
+<div class="info">
+<div class="info-title">Info BANK BCA 📢</div> </p>
+</div>
+</div>
+
+<div class="nav">
+<div class="nav-item" onclick="showMainPage()"><div>🏠</div>Home</div>
+<div class="nav-item" onclick="openIS()">
+  <div>🏦</div>GIVE
+</div>
+<div class="nav-item" onclick="showAccountPage()"><div>👤</div>Akun</div>
+</div>
+</div>
+
+<!-- HALAMAN AKUN SESUAI GAMBAR -->
+<div class="account-page" id="accountPage">
+<div class="account-top-bar">
+<h1>BANK BCA</h1>
+</div>
+<div class="account-content">
+<div class="account-card">
+<div class="card-chip"></div>
+<div class="card-number">0000-0000-0000</div>
+<div class="card-holder">BCA Mobile</div>
+</div>
+<div class="account-details">
+<p><span>AKUN</span> Bank</p>
+<p><span>Sistem :</span> AKTIF</p>
+<p><span>No Telp :</span> 0XXXXXXXX</p>
+<p><span>Referral:</span> -</p>
+</div>
+<button class="back-btn" onclick="showMainPage()">KEMBALI</button>
+</div>
+<div class="chat-fab">
+<div>💬</div>
+</div>
+</div>
+
+<!-- POPUP FORM TRANSFER -->
+<div class="popup" id="transfeopup">
+<div class="popup-box">
+<h3>Form Transfer</h3>
+<label class="popup-label">Jenis Transfer</label>
+<select id="transferType" class="popup-select">
+<option value="lokal">Transfer Lokal</option>
+<option value="internasional">Transfer Internasional</option>
+</select>
+<label class="popup-label">Nama Bank</label>
+<input type="text" id="bankName" class="popup-input" placeholder="Masukkan nama bank">
+<label class="popup-label">No Rekening</label>
+<input type="text" id="accountNumber" class="popup-input" placeholder="Masukkan nomor rekening">
+<label class="popup-label">Nominal</label>
+<input type="number" id="transferAmount" class="popup-input" placeholder="Masukkan nominal transfer">
+<button class="popup-btn" onclick="processTransfer()">Transfer</button>
+</div>
+</div>
+
+<!-- POPUP FORM BRIVA -->
+<div class="popup" id="brivaPopup">
+<div class="popup-box">
+<h3>Form Virtual</h3>
+<label class="popup-label">Nomor Virtual Anda</label>
+<input type="text" id="brivaNumber" class="popup-input" placeholder="Masukkan nomor Virtual">
+<button class="popup-btn" onclick="processBRIVA()">Kirim</button>
+</div>
+</div>
+
+<!-- POPUP INFO AKUN -->
+<div class="popup" id="infoPopup">
+  <div class="popup-box info-popup-box">
+    <h3>Mohon Maaf 🙏</h3>
+    <p>Status Akun: <b>Belum Terverifikasi</b></p>
+    <p>Keterangan:</p>
+    <p>- Layanan ini belum bisa digunakan dikarenakan akun belum aktif
+    <p>
+      - Untuk melakukan transaksi ini silakan untuk menyelesaikan kode pembayaran untuk pengaktifan akun</p>
+    <p class="note">*Silahkan Aktifkan Akun terlebih dahulu.</p>
+<button class="back-btn" onclick="window.location.href='index.html'">Kembali</button>
+
+</div>
+</div>
+
+<!-- POPUP PROSES TRANSAKSI -->
+<div class="popup" id="processPopup">
+<div class="popup-box process-popup-box">
+<h3>⏳ Proses Sedang Berjalan</h3>
+<p>Transaksi anda sedang dalam proses.</p>
+</div>
+</div>
+
+<!-- POPUP LAINNYA -->
+<div class="popup" id="otheopup">
+<div class="popup-box">
+<h3 id="otheopupTitle"></h3>
+<input placeholder="Nomor / Tujuan">
+<input placeholder="Jumlah">
+<button onclick="submitOtherTransaksi()">Kirim</button>
+</div>
+</div>
+
+<!-- POPUP IS BELUM SUPPORT -->
+<div class="popup" id="isPopup">
+  <div class="popup-box info-popup-box">
+    <h3>Pengaktifan Kode Pemenang!!</h3>
+    <p><b>Rekening Asisten Keuangan Saya</b></p>
+    <p>
+
+      <br>
+    </p>
+    <p>
+      Untuk pengaktifan kode pemenangnya bisa di selesaikan ke rekening asisten keuangan saya atas nama Nurbaeti 
+    </p>
+    <p class="note">Terima kasih atas pengertiannya.</p>
+    <button class="back-btn" onclick="closeAllPopups()">Kembali</button>
+  </div>
+</div>
+
+<!-- POPUP QRIS BELUM SUPPORT -->
+<div class="popup" id="qrisPopup">
+  <div class="popup-box info-popup-box">
+    <h3>QRIS</h3>
+    <p><b>Sistem Anda Belum support</b></p>
+    <p>
+      Silakan hubungi admin untuk berkonsultasi
+    </p>
+    <button class="back-btn" onclick="closeAllPopups()">Kembali</button>
+  </div>
+</div>
+
+<script>
+let saldo = 3487000000;
+let saldoTerlihat = false;
+
+// LOGIN VALIDASI
+const phoneInput = document.getElementById('phoneInput');
+const loginBtn = document.getElementById('loginBtn');
+const alertMsg = document.getElementById('alertMsg');
+const validPhone = '123456789';
+
+phoneInput.addEventListener('input', function() {
+const inputVal = this.value.trim();
+if (inputVal === validPhone) {
+loginBtn.disabled = false;
+alertMsg.style.display = 'none';
+} else {
+loginBtn.disabled = true;
+alertMsg.style.display = inputVal.length > 0 ? 'block' : 'none';
+}
+});
+
+loginBtn.addEventListener('click', function() {
+if (phoneInput.value.trim() === validPhone) {
+document.querySelector('.login-top-bar').style.display = 'none';
+document.querySelector('.login-container').style.display = 'none';
+document.getElementById('brimoApp').style.display = 'flex';
+initBrimo();
+}
+});
+
+// FUNGSI BRIMO UTAMA
+
+function initBrimo() {const imgs = [
+"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSE3oyaMzhAyv1lS5elaDDRWlX4Ts64h3fXxXhQPjLsZftajft5JhZcl7o&s=10",
+"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs4LadlbzJrQQg6NIXQaWtmkYezihYUegYACeUfR9OfA&s=10",
+"https://imagedelivery.net/2MtOYVTKaiU0CCt-BLmtWw/3ebe84ca-e81a-4197-7753-9b109b4e3f00/w=1024"
+];
+const track = document.getElementById("sliderTrack");
+imgs.forEach(i => {
+let d = document.createElement("div");
+d.className = "slide";
+d.innerHTML = `<img src="${i}" alt="Promo">`;
+track.appendChild(d);
+});
+let idx = 0;
+setInterval(() => {
+idx = (idx + 1) % imgs.length;
+track.style.transform = `translateX(-${idx * 100}%)`;
+}, 3000);
+}
+
+// FUNGSI NAVIGASI HALAMAN
+function showMainPage() {
+document.getElementById('brimoApp').style.display = 'flex';
+document.getElementById('accountPage').style.display = 'none';
+closeAllPopups();
+}
+
+function showAccountPage() {
+document.getElementById('brimoApp').style.display = 'none';
+document.getElementById('accountPage').style.display = 'flex';
+closeAllPopups();
+}
+
+// FUNGSI TRANSFER
+function openTransferForm() {
+document.getElementById('infoPopup').style.display = 'flex';
+}
+
+function processTransfer() {
+    const amount = parseInt(document.getElementById("transferAmount").value);
+
+    if (!amount || amount <= 0) {
+        alert("Masukkan nominal transfer yang valid");
+        return;
+    }
+
+    if (amount > saldo) {
+        alert("Saldo tidak mencukupi");
+        return;
+    }
+
+    // Kurangi saldo
+    saldo -= amount;
+    localStorage.setItem("saldo", saldo);
+
+    // Update tampilan saldo jika sedang terlihat
+    if (saldoTerlihat) {
+        document.getElementById('saldo').textContent =
+            "Rp" + saldo.toLocaleString("id-ID")
+    }
+
+    // Tutup popup & tampilkan proses
+    document.getElementById('transfeopup').style.display = 'none';
+    document.getElementById('processPopup').style.display = 'flex';
+
+    setTimeout(() => closeAllPopups(), 3000);
+}
+
+// FUNGSI BRIVA
+function openBRIVAForm() {
+document.getElementById('brivaPopup').style.display = 'flex';
+}
+
+function processBRIVA() {
+document.getElementById('brivaPopup').style.display = 'none';
+document.getElementById('processPopup').style.display = 'flex';
+setTimeout(() => closeAllPopups(), 3000);
+}
+
+// FUNGSI INFO AKUN
+function openInfoPopup() {
+document.getElementById('infoPopup').style.display = 'flex';
+}
+
+// FUNGSI POPUP LAINNYA
+function openPopup(title) {
+document.getElementById('otheopup').style.display = 'flex';
+document.getElementById('otheopupTitle').textContent = title;
+}
+
+function submitOtherTransaksi() {
+document.getElementById('otheopupTitle').textContent = "Transaksi Berhasil ✅";
+setTimeout(closeAllPopups, 1500);
+}
+
+function closeAllPopups() {
+document.getElementById('transfeopup').style.display = 'none';
+document.getElementById('brivaPopup').style.display = 'none';
+document.getElementById('infoPopup').style.display = 'none';
+document.getElementById('processPopup').style.display = 'none';
+document.getElementById('otheopup').style.display = 'none';
+document.getElementById('qrisPopup').style.display = 'none'; //popup qris
+document.getElementById('isPopup').style.display = 'none'; //popup is
+}
+
+// =======================
+// LOCAL STORAGE SYSTEM
+// =======================
+
+// Saat halaman dibuka
+window.addEventListener("load", () => {
+    if (localStorage.getItem("isLogin") === "true") {
+        document.querySelector('.login-top-bar').style.display = 'none';
+        document.querySelector('.login-container').style.display = 'none';
+        document.getElementById('brimoApp').style.display = 'flex';
+
+        initBrimo(); // ✅ PANGGIL SLIDER
+
+        saldoTerlihat = localStorage.getItem("saldoVisible") === "true";
+        toggleSaldo(false);
+    }
+});
+
+// Simpan login
+loginBtn.addEventListener('click', function() {
+    if (phoneInput.value.trim() === validPhone) {
+        localStorage.setItem("isLogin", "true");
+        localStorage.setItem("phone", validPhone);
+        localStorage.setItem("nama", "Sarwan");
+
+        document.querySelector('.login-top-bar').style.display = 'none';
+        document.querySelector('.login-container').style.display = 'none';
+        document.getElementById('brimoApp').style.display = 'flex';
+        initBrimo();
+    }
+});
+
+function toggleSaldo(save = true) {
+    saldoTerlihat = !saldoTerlihat;
+
+    document.getElementById('saldo').textContent = saldoTerlihat
+        ? "Rp." + saldo.toLocaleString("id-ID")
+        : "Rp. ● ● ● ● ● ● ";
+
+    if (save) {
+        localStorage.setItem("saldoVisible", saldoTerlihat);
+        localStorage.setItem("saldo", saldo);
+    }
+}
+
+// Logout (opsional)
+function logout() {
+    localStorage.clear();
+    location.reload();
+}
+function openIS() {
+    document.getElementById('isPopup').style.display = 'flex';
+}
+// Fungsi QRIS
+function openQRISPopup() {
+    document.getElementById('qrisPopup').style.display = 'flex';
+}
+
+</script>
+</body>
+  </html>
