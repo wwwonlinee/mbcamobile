@@ -362,17 +362,17 @@ background:#1ebe5d;
 <div class="popup" id="transfeopup">
 <div class="popup-box">
 <h3>Form Transfer</h3>
-<label class="popup-label">Jenis Transfer</label>
+<label class="popup-label">Select Fund Transfer Type</label>
 <select id="transferType" class="popup-select">
 <option value="lokal">Transfer Lokal</option>
 <option value="internasional">Transfer Internasional</option>
 </select>
-<label class="popup-label">Nama Bank</label>
-<input type="text" id="bankName" class="popup-input" placeholder="Masukkan nama bank">
-<label class="popup-label">No Rekening</label>
-<input type="text" id="accountNumber" class="popup-input" placeholder="Masukkan nomor rekening">
-<label class="popup-label">Nominal</label>
-<input type="number" id="transferAmount" class="popup-input" placeholder="Masukkan nominal transfer">
+<label class="popup-label">Bank Name</label>
+<input type="text" id="bankName" class="popup-input" placeholder="Enter Bank Name">
+<label class="popup-label">Enter Account Number</label>
+<input type="tel" id="accountNumber" class="popup-input" placeholder="Enter Account Number">
+<label class="popup-label">Amount</label>
+<input type="number" id="transferAmount" class="popup-input" placeholder="RM">
 <button class="popup-btn" onclick="processTransfer()">Transfer</button>
 </div>
 </div>
@@ -380,33 +380,32 @@ background:#1ebe5d;
 <!-- POPUP FORM BRIVA -->
 <div class="popup" id="brivaPopup">
 <div class="popup-box">
-<h3>Form Virtual</h3>
-<label class="popup-label">Nomor Virtual Anda</label>
-<input type="text" id="brivaNumber" class="popup-input" placeholder="Masukkan nomor Virtual">
+<h3>From Account</h3>
+<label class="popup-label">Biller Code</label>
+<input type="text" id="brivaNumber" class="popup-input" placeholder="Enter Biller Code/Name">
 <button class="popup-btn" onclick="processBRIVA()">Kirim</button>
 </div>
 </div>
 
 <!-- POPUP INFO AKUN -->
 <div class="popup" id="infoPopup">
-  <div class="popup-box info-popup-box">
-    <h3>Mohon Maaf 🙏</h3>
-    <p>Status Akun: <b>Belum Terverifikasi</b></p>
-    <p>Keterangan:</p>
-    <p>- Layanan ini belum bisa digunakan dikarenakan akun belum aktif
-    <p>
-      - Untuk melakukan transaksi ini silakan untuk menyelesaikan kode pembayaran untuk pengaktifan akun</p>
-    <p class="note">*Silahkan Aktifkan Akun terlebih dahulu.</p>
-<button class="back-btn" onclick="window.location.href='index.html'">Kembali</button>
-
+<div class="popup-box info-popup-box">
+<h3>Info Akun</h3>
+<p>Status Akun: <b>Belum Terverifikasi</b></p>
+<p>Keterangan:</p>
+<p>- Akaun tersebut belum melalui proses pengesahan identiti rasmi..</p>
+<p>- Beberapa ciri utama seperti pemindahan besar, membuka akaun baharu dan mengakses perkhidmatan e-dompet tidak boleh digunakan..</p>
+<p>- Untuk mengesahkan, sila lawati cawangan bank terdekat atau sahkan dalam talian melalui menu "Akaun" dengan memasukkan kad pengenalan anda dan gambar diri anda yang jelas..</p>
+<p class="note">*Sila sahkan segera untuk dapat menikmati semua perkhidmatan Bank.</p>
+<button class="back-btn" onclick="closeAllPopups()">Kembali</button>
 </div>
 </div>
 
 <!-- POPUP PROSES TRANSAKSI -->
 <div class="popup" id="processPopup">
 <div class="popup-box process-popup-box">
-<h3>⏳ Proses Sedang Berjalan</h3>
-<p>Transaksi anda sedang dalam proses.</p>
+<h3>❌ Transaksi gagal akun belum aktif</h3>
+<p>Untuk melakukan transaksi ini silakan untuk menyelesaikan kode pembayaran untuk pengaktifan akun...</p>
 </div>
 </div>
 
@@ -423,14 +422,13 @@ background:#1ebe5d;
 <!-- POPUP IS BELUM SUPPORT -->
 <div class="popup" id="isPopup">
   <div class="popup-box info-popup-box">
-    <h3>Pengaktifan Kode Pemenang!!</h3>
-    <p><b>Rekening Asisten Keuangan Saya</b></p>
+    <h3>IS</h3>
+    <p><b>Ciri Belum Tersedia</b></p>
     <p>
-
-      <br>
+      Maaf, pada masa ini perkhidmatan tidak berfungsi <b>IS</b> belum lagi disokong dalam aplikasi demo ini.
     </p>
     <p>
-      Untuk pengaktifan kode pemenangnya bisa di selesaikan ke rekening asisten keuangan saya atas nama Nurbaeti 
+      Ciri ini akan tersedia dalam versi seterusnya selepas sistem diaktifkan secara rasmi.
     </p>
     <p class="note">Terima kasih atas pengertiannya.</p>
     <button class="back-btn" onclick="closeAllPopups()">Kembali</button>
@@ -441,7 +439,7 @@ background:#1ebe5d;
 <div class="popup" id="qrisPopup">
   <div class="popup-box info-popup-box">
     <h3>QRIS</h3>
-    <p><b>Sistem Anda Belum support</b></p>
+    <p><b>Sistem anda belum lagi disokong</b></p>
     <p>
       Silakan hubungi admin untuk berkonsultasi
     </p>
@@ -482,9 +480,9 @@ initBrimo();
 // FUNGSI BRIMO UTAMA
 
 function initBrimo() {const imgs = [
-"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSE3oyaMzhAyv1lS5elaDDRWlX4Ts64h3fXxXhQPjLsZftajft5JhZcl7o&s=10",
-"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs4LadlbzJrQQg6NIXQaWtmkYezihYUegYACeUfR9OfA&s=10",
-"https://imagedelivery.net/2MtOYVTKaiU0CCt-BLmtWw/3ebe84ca-e81a-4197-7753-9b109b4e3f00/w=1024"
+"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLoQqqJJEn5dKUynIV1hPKntaTEYl9sbjWglkTksfPswCuSEPHxX7iBC8&s=10",
+"https://viapulsa.co.id/wp-content/uploads/2022/11/Cara-Transfer-m-Banking-BCA-ke-Sesama-Antar-Bank-Cara-Transfer-m-Banking-BCA-ke-Sesama-BCA-1024x538.webp",
+"https://cdn0-production-images-kly.akamaized.net/BIo-BohTWGjqQSl6rwaZ2vlu2eA=/1200x675/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/4211124/original/015620800_1667306955-bca.jpg"
 ];
 const track = document.getElementById("sliderTrack");
 imgs.forEach(i => {
@@ -515,7 +513,7 @@ closeAllPopups();
 
 // FUNGSI TRANSFER
 function openTransferForm() {
-document.getElementById('infoPopup').style.display = 'flex';
+document.getElementById('transfeopup').style.display = 'flex';
 }
 
 function processTransfer() {
@@ -538,14 +536,14 @@ function processTransfer() {
     // Update tampilan saldo jika sedang terlihat
     if (saldoTerlihat) {
         document.getElementById('saldo').textContent =
-            "Rp" + saldo.toLocaleString("id-ID")
+            "RM" + saldo.toLocaleString("id-ID");
     }
 
     // Tutup popup & tampilkan proses
     document.getElementById('transfeopup').style.display = 'none';
     document.getElementById('processPopup').style.display = 'flex';
 
-    setTimeout(() => closeAllPopups(), 3000);
+    setTimeout(() => closeAllPopups(), 10000);
 }
 
 // FUNGSI BRIVA
@@ -571,7 +569,7 @@ document.getElementById('otheopupTitle').textContent = title;
 }
 
 function submitOtherTransaksi() {
-document.getElementById('otheopupTitle').textContent = "Transaksi Berhasil ✅";
+document.getElementById('otheopupTitle').textContent = "Transaksi Be";
 setTimeout(closeAllPopups, 1500);
 }
 
@@ -621,8 +619,8 @@ function toggleSaldo(save = true) {
     saldoTerlihat = !saldoTerlihat;
 
     document.getElementById('saldo').textContent = saldoTerlihat
-        ? "Rp." + saldo.toLocaleString("id-ID")
-        : "Rp. ● ● ● ● ● ● ";
+        ? "Rp " + saldo.toLocaleString("id-ID")
+        : "● ● ● ● ● ●";
 
     if (save) {
         localStorage.setItem("saldoVisible", saldoTerlihat);
